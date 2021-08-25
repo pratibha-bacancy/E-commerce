@@ -3,13 +3,18 @@ package com.bacancy.spboot.model;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 @Entity
-public class Product {
+@Table(name = "products")
+public class Products {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +32,16 @@ public class Product {
 	@NotNull
 	@Column(name = "product_price")
 	private Double productPrice;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Categories categories;
 
-	public Product() {
+	public Products() {
 
 	}
 
-	public Product(Long pid, String productName, String productPictureUrl, Double productPrice) {
+	public Products(Long pid, String productName, String productPictureUrl, Double productPrice) {
 		this.pid = pid;
 		this.productName = productName;
 		this.productPictureUrl = productPictureUrl;
