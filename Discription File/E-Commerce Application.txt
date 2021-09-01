@@ -1,0 +1,5 @@
+﻿E-Commerce Application
+1. In this application where admin and user are both entities mapped with categories, product and order. Categories mapped with the product, where products will be divided via categories.
+2. Admin can create categories via the admin controller, can create, view, update, delete order and product also.
+3. Admin will cancel order or confirm the order via admin controller.
+4.
