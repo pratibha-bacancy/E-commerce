@@ -1,6 +1,5 @@
 package com.bacancy.spboot.model;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,10 +17,9 @@ public class Products {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long pid;
+	private Long id;
 
 	@NotNull
-	@Basic(optional = false)
 	@Column(name = "product_name")
 	private String productName;
 
@@ -32,7 +30,11 @@ public class Products {
 	@NotNull
 	@Column(name = "product_price")
 	private Double productPrice;
-	
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private User user;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Categories categories;
@@ -41,19 +43,22 @@ public class Products {
 
 	}
 
-	public Products(Long pid, String productName, String productPictureUrl, Double productPrice) {
-		this.pid = pid;
+	public Products(Long id, String productName, String productPictureUrl, Double productPrice, User user,
+			Categories categories) {
+		this.id = id;
 		this.productName = productName;
 		this.productPictureUrl = productPictureUrl;
 		this.productPrice = productPrice;
+		this.user = user;
+		this.categories = categories;
 	}
 
-	public Long getPid() {
-		return pid;
+	public Long getId() {
+		return id;
 	}
 
-	public void setPid(Long pid) {
-		this.pid = pid;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getProductName() {
@@ -64,6 +69,14 @@ public class Products {
 		this.productName = productName;
 	}
 
+	public String getProductPictureUrl() {
+		return productPictureUrl;
+	}
+
+	public void setProductPictureUrl(String productPictureUrl) {
+		this.productPictureUrl = productPictureUrl;
+	}
+
 	public Double getProductPrice() {
 		return productPrice;
 	}
@@ -72,12 +85,12 @@ public class Products {
 		this.productPrice = productPrice;
 	}
 
-	public String getProductPictureUrl() {
-		return productPictureUrl;
+	public User getUser() {
+		return user;
 	}
 
-	public void setProductPictureUrl(String productPictureUrl) {
-		this.productPictureUrl = productPictureUrl;
+	public Categories getCategories() {
+		return categories;
 	}
 
 }
