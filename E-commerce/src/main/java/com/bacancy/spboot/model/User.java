@@ -41,6 +41,9 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Categories> categories = new ArrayList<>();
 
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Order> order = new ArrayList<>();
+
 	public User() {
 
 	}
@@ -102,6 +105,10 @@ public class User {
 
 	public List<Categories> getCategories() {
 		return categories;
+	}
+
+	public List<Order> getOrder() {
+		return order;
 	}
 
 }

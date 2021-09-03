@@ -6,15 +6,17 @@ public class OrderDto {
 	private Long id;
 	private LocalDate dateCreated;
 	private String status;
+	private Long price;
 
 	public OrderDto() {
 
 	}
 
-	public OrderDto(Long id, LocalDate dateCreated, String status) {
+	public OrderDto(Long id, LocalDate dateCreated, String status, Long price) {
 		this.id = id;
 		this.dateCreated = dateCreated;
 		this.status = status;
+		this.price = price;
 	}
 
 	public Long getId() {
@@ -39,6 +41,14 @@ public class OrderDto {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
 	}
 
 }
