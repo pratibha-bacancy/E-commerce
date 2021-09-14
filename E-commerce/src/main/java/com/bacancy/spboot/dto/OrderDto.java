@@ -1,22 +1,23 @@
 package com.bacancy.spboot.dto;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class OrderDto {
 	private Long id;
-	private LocalDate dateCreated;
-	private String status;
-	private Long price;
+	private Date dateCreated;
+	private Integer productQuantity;
+	private Long totalPrice;
 
 	public OrderDto() {
 
 	}
 
-	public OrderDto(Long id, LocalDate dateCreated, String status, Long price) {
+	public OrderDto(Long id, Date dateCreated, Integer productQuantity, Long totalPrice) {
 		this.id = id;
 		this.dateCreated = dateCreated;
-		this.status = status;
-		this.price = price;
+		this.productQuantity = productQuantity;
+		this.totalPrice = totalPrice;
 	}
 
 	public Long getId() {
@@ -27,28 +28,28 @@ public class OrderDto {
 		this.id = id;
 	}
 
-	public LocalDate getDateCreated() {
+	public Date getDateCreated() {
 		return dateCreated;
 	}
 
-	public void setDateCreated(LocalDate dateCreated) {
+	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 
-	public String getStatus() {
-		return status;
+	public Integer getProductQuantity() {
+		return productQuantity;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setProductQuantity(Integer productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 
-	public Long getPrice() {
-		return price;
+	public Long getTotalPrice() {
+		return totalPrice;
 	}
 
-	public void setPrice(Long price) {
-		this.price = price;
+	public void setTotalPrice(Long totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }

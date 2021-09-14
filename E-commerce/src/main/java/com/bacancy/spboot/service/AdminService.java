@@ -1,20 +1,28 @@
 package com.bacancy.spboot.service;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bacancy.spboot.dto.CategoriesDto;
 import com.bacancy.spboot.dto.OrderDto;
+import com.bacancy.spboot.dto.OrderStatusDto;
 import com.bacancy.spboot.dto.ProductsDto;
 import com.bacancy.spboot.exception.DataFoundException;
 import com.bacancy.spboot.exception.DataNotFoundException;
 import com.bacancy.spboot.model.Categories;
 import com.bacancy.spboot.model.Order;
+import com.bacancy.spboot.model.OrderStatus;
 import com.bacancy.spboot.model.Products;
+import com.bacancy.spboot.model.User;
 import com.bacancy.spboot.repository.CategoriesRepository;
 import com.bacancy.spboot.repository.OrderRepository;
+import com.bacancy.spboot.repository.OrderStatusRepository;
 import com.bacancy.spboot.repository.ProductsRepository;
+import com.bacancy.spboot.repository.UserRepository;
 
 @Service
 public class AdminService {
@@ -27,6 +35,12 @@ public class AdminService {
 
 	@Autowired
 	private OrderRepository orderRepository;
+
+	@Autowired
+	private OrderStatusRepository orderStatusRepository;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -89,4 +103,31 @@ public class AdminService {
 		return orderDto;
 	}
 
+	public String confirmOrder(Long userId, Long orderId, OrderStatusDto orderStatusDto) {
+		Optional<OrderStatus> orderStatus = Optional.of(orderStatusRepository.findByOrderId(orderId));
+		if (orderStatus.get().getStatus().equals("Confirmed"))
+			return "Order Delivered!";
+		OrderStatus order = modelMapper.map(orderStatusDto, OrderStatus.class);
+		Optional<User> userOptional = userRepository.findById(userId);
+		User user = userOptional.get();
+		order.setUser(user);
+		orderStatusRepository.save(order);
+		return "Order Confirmed!";
+	}
+
+	public String cancleOrder(Long orderId, OrderDto orderDto) {
+		Optional<OrderStatus> orderStatus = Optional.of(orderStatusRepository.findByOrderId(orderId));
+		if (orderStatus.get().getStatus().equals("Confirmed"))
+			return "Order Already Confirmed!";
+		orderStatusRepository.deleteById(orderId);
+		orderRepository.deleteById(orderId);
+		return "Order Cancle!";
+	}
+
+	public List<OrderDto> getAllOrderRangeOfDate(Date start, Date end) {
+		List<Order> order = (List<Order>) orderRepository.findByOrderDateBetween(start, end);
+		List<OrderDto> orderDto = order.stream().map(product -> modelMapper.map(product, OrderDto.class))
+				.collect(Collectors.toList());
+		return orderDto;
+	}
 }

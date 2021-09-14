@@ -1,6 +1,9 @@
 package com.bacancy.spboot.model;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,8 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -20,30 +23,38 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@JsonFormat(pattern = "dd/mm/yyyy")
-	@Column(name = "date_created")
-	private LocalDate dateCreated;
+	@Column(name = "order_date")
+	private Date orderDate;
 
-	@Column(name = "status")
-	private String status;
+	@Column(name = "product_quantity")
+	private Integer productQuantity;
 
-	@Column(name = "price")
-	private Long price;
+	@Column(name = "total_price")
+	private Long totalPrice;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private User user;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<OrderStatus> status = new ArrayList<>();
+
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Products> products = new ArrayList<>();
+
 	public Order() {
 
 	}
 
-	public Order(Long id, LocalDate dateCreated, String status, Long price, User user) {
+	public Order(Long id, Date orderDate, Integer productQuantity, Long totalPrice, User user, List<OrderStatus> status,
+			List<Products> products) {
 		this.id = id;
-		this.dateCreated = dateCreated;
-		this.status = status;
-		this.price = price;
+		this.orderDate = orderDate;
+		this.productQuantity = productQuantity;
+		this.totalPrice = totalPrice;
 		this.user = user;
+		this.status = status;
+		this.products = products;
 	}
 
 	public Long getId() {
@@ -54,32 +65,44 @@ public class Order {
 		this.id = id;
 	}
 
-	public LocalDate getDateCreated() {
-		return dateCreated;
+	public Date getDateCreated() {
+		return orderDate;
 	}
 
-	public void setDateCreated(LocalDate dateCreated) {
-		this.dateCreated = dateCreated;
+	public void setDateCreated(Date orderDate) {
+		this.orderDate = orderDate;
 	}
 
-	public String getStatus() {
-		return status;
+	public Integer getProductQuantity() {
+		return productQuantity;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setProductQuantity(Integer productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 
-	public Long getPrice() {
-		return price;
+	public Long getTotalPrice() {
+		return totalPrice;
 	}
 
-	public void setPrice(Long price) {
-		this.price = price;
+	public void setTotalPrice(Long totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public User getUser() {
 		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<OrderStatus> getStatus() {
+		return status;
+	}
+
+	public List<Products> getProducts() {
+		return products;
 	}
 
 }

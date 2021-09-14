@@ -1,5 +1,7 @@
 package com.bacancy.spboot.controller;
 
+import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bacancy.spboot.dto.CategoriesDto;
 import com.bacancy.spboot.dto.OrderDto;
+import com.bacancy.spboot.dto.OrderStatusDto;
 import com.bacancy.spboot.dto.ProductsDto;
 import com.bacancy.spboot.service.AdminService;
 
 @RestController
-@RequestMapping("/api/admin/")
+@RequestMapping("/e-commerce/admin/")
 public class AdminController {
 
 	@Autowired
@@ -59,6 +62,23 @@ public class AdminController {
 	public ResponseEntity<Object> updateOrder(@PathVariable long id, @RequestBody OrderDto orderDto) {
 		adminService.updateOrder(id, orderDto);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@PutMapping("{userId}/order/{orderId}")
+	public ResponseEntity<Object> confirmOrder(@PathVariable Long userId, @PathVariable Long orderId,
+			@RequestBody OrderStatusDto orderStatusDto) {
+		return new ResponseEntity<>(adminService.confirmOrder(userId, orderId, orderStatusDto), HttpStatus.CREATED);
+	}
+
+	@DeleteMapping("/order/{orderId}")
+	public ResponseEntity<Object> cancleOrder(@PathVariable Long orderId, @RequestBody OrderDto orderDto) {
+		adminService.cancleOrder(orderId, orderDto);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@GetMapping("/order/{start}/{end}")
+	public List<OrderDto> getAllOrderRangeOfDates(@PathVariable Date start,@PathVariable Date end) {
+		return adminService.getAllOrderRangeOfDate(start,end);
 	}
 
 }

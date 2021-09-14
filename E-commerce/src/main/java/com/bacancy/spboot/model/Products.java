@@ -38,6 +38,10 @@ public class Products {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Categories categories;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Order order;
 
 	public Products() {
 
