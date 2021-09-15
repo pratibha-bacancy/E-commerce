@@ -65,11 +65,11 @@ public class Order {
 		this.id = id;
 	}
 
-	public Date getDateCreated() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
 
-	public void setDateCreated(Date orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 

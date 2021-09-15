@@ -1,10 +1,11 @@
 package com.bacancy.spboot.repository;
 
-import org.springframework.data.repository.CrudRepository;
-
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import com.bacancy.spboot.model.OrderStatus;
 
-public interface OrderStatusRepository extends CrudRepository<OrderStatus, Long> {
+@Repository
+public interface OrderStatusRepository extends JpaRepository<OrderStatus, Long> {
 
 	public OrderStatus findByUserId(Long id);
 

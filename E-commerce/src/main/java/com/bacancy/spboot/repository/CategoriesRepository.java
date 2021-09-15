@@ -1,11 +1,12 @@
 package com.bacancy.spboot.repository;
 
 import java.util.Optional;
-
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import com.bacancy.spboot.model.Categories;
 
-public interface CategoriesRepository extends CrudRepository<Categories, Long> {
+@Repository
+public interface CategoriesRepository extends JpaRepository<Categories, Long> {
 
 	public Optional<Categories> findByCategoryName(String categoryName);
 
