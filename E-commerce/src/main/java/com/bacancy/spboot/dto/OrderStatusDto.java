@@ -1,16 +1,20 @@
 package com.bacancy.spboot.dto;
 
+import java.util.Date;
+
 public class OrderStatusDto {
 	private Long id;
 	private String Status;
+	private Date OrderDate;
 
 	public OrderStatusDto() {
 
 	}
 
-	public OrderStatusDto(Long id, String status) {
+	public OrderStatusDto(Long id, String status, Date orderDate) {
 		this.id = id;
 		Status = status;
+		OrderDate = orderDate;
 	}
 
 	public Long getId() {
@@ -28,4 +32,13 @@ public class OrderStatusDto {
 	public void setStatus(String status) {
 		Status = status;
 	}
+
+	public Date getOrderDate() {
+		return OrderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		OrderDate = orderDate;
+	}
+
 }

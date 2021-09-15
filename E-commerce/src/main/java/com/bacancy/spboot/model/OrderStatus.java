@@ -1,5 +1,7 @@
 package com.bacancy.spboot.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +21,10 @@ public class OrderStatus {
 	private Long id;
 
 	@Column(name = "status")
-	private String Status;
+	private String status;
+
+	@Column(name = "order_date")
+	private Date OrderDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -33,11 +38,10 @@ public class OrderStatus {
 
 	}
 
-	public OrderStatus(Long id, String status, User user, Order order) {
+	public OrderStatus(Long id, String status, Date orderDate) {
 		this.id = id;
-		Status = status;
-		this.user = user;
-		this.order = order;
+		this.status = status;
+		OrderDate = orderDate;
 	}
 
 	public Long getId() {
@@ -49,11 +53,19 @@ public class OrderStatus {
 	}
 
 	public String getStatus() {
-		return Status;
+		return status;
 	}
 
 	public void setStatus(String status) {
-		Status = status;
+		this.status = status;
+	}
+
+	public Date getOrderDate() {
+		return OrderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		OrderDate = orderDate;
 	}
 
 	public void setUser(User user) {

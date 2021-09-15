@@ -130,4 +130,22 @@ public class AdminService {
 				.collect(Collectors.toList());
 		return orderDto;
 	}
+
+	public OrderStatusDto trackOfTheOrder(long id) {
+		Optional<OrderStatus> orderStatus = orderStatusRepository.findById(id);
+		if (!orderStatus.isPresent()) {
+			throw new DataNotFoundException("Order does not exist");
+		}
+		OrderStatusDto orderstatusDto = modelMapper.map(orderStatus, OrderStatusDto.class);
+		return orderstatusDto;
+	}
+
+	public List<ProductsDto> totalProductsSold(Date start, Date end) {
+		Optional<OrderStatus> orderStatus = Optional.of(orderStatusRepository.findByOrderDateBetween(start, end));
+		if (orderStatus.get().getStatus().equals("Placed")) {
+
+		}
+
+	}
+
 }

@@ -65,20 +65,30 @@ public class AdminController {
 	}
 
 	@PutMapping("{userId}/order/{orderId}")
-	public ResponseEntity<Object> confirmOrder(@PathVariable Long userId, @PathVariable Long orderId,
+	public ResponseEntity<Object> confirmOrder(@PathVariable long userId, @PathVariable Long orderId,
 			@RequestBody OrderStatusDto orderStatusDto) {
 		return new ResponseEntity<>(adminService.confirmOrder(userId, orderId, orderStatusDto), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/order/{orderId}")
-	public ResponseEntity<Object> cancleOrder(@PathVariable Long orderId, @RequestBody OrderDto orderDto) {
+	public ResponseEntity<Object> cancleOrder(@PathVariable long orderId, @RequestBody OrderDto orderDto) {
 		adminService.cancleOrder(orderId, orderDto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@GetMapping("/order/{start}/{end}")
-	public List<OrderDto> getAllOrderRangeOfDates(@PathVariable Date start,@PathVariable Date end) {
-		return adminService.getAllOrderRangeOfDate(start,end);
+	public List<OrderDto> getAllOrderRangeOfDates(@PathVariable Date start, @PathVariable Date end) {
+		return adminService.getAllOrderRangeOfDate(start, end);
+	}
+
+	@GetMapping("/order/track/{id}")
+	public OrderStatusDto trackOfTheOrder(@PathVariable long id) {
+		return adminService.trackOfTheOrder(id);
+	}
+	
+	@GetMapping("/product/sold/{start}/{end}")
+	public List<ProductsDto> totalProductsSold(@PathVariable Date start, @PathVariable Date end) {
+		return adminService.totalProductsSold(start, end);
 	}
 
 }
