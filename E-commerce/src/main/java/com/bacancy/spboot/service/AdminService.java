@@ -1,6 +1,6 @@
 package com.bacancy.spboot.service;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

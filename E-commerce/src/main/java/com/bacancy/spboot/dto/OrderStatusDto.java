@@ -1,6 +1,6 @@
 package com.bacancy.spboot.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class OrderStatusDto {
 	private Long id;

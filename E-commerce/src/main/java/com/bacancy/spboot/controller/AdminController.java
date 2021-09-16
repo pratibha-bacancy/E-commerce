@@ -1,6 +1,6 @@
 package com.bacancy.spboot.controller;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -90,5 +90,4 @@ public class AdminController {
 	public long totalProductsSold(@PathVariable Date start, @PathVariable Date end) {
 		return adminService.totalProductsSoldAmount(start, end);
 	}
-
 }
