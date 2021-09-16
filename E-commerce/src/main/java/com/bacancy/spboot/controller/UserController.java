@@ -1,6 +1,9 @@
 package com.bacancy.spboot.controller;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,15 +26,17 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	Logger logger=LoggerFactory.getLogger(AdminController.class);
 
 	@GetMapping("/products/menu")
-	public List<ProductsDto> getAllProducts() {
-		return userService.getAllProducts();
+	public ResponseEntity<List<ProductsDto>> getAllProducts() {
+		return new ResponseEntity<List<ProductsDto>>(userService.getAllProducts(), HttpStatus.OK);
 	}
 
 	@GetMapping("/orders/menu")
-	public List<OrderDto> getAllOrders() {
-		return userService.getAllOrders();
+	public ResponseEntity<List<OrderDto>> getAllOrders() {
+		return new ResponseEntity<List<OrderDto>>(userService.getAllOrders(), HttpStatus.OK);
 	}
 
 	@PostMapping("/{id}/order")
@@ -40,13 +45,13 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}/orders")
-	public List<OrderDto> getUserOrders(@PathVariable Long id) {
-		return userService.getUserOrders(id);
+	public ResponseEntity<List<OrderDto>> getUserOrders(@PathVariable Long id) {
+		return new ResponseEntity<List<OrderDto>>(userService.getUserOrders(id), HttpStatus.OK);
 	}
 
 	@GetMapping("/order/{orderId}/status")
-	public OrderStatusDto getUserOrderStatus(@PathVariable Long orderId) {
-		return userService.getUserOrderStatus(orderId);
+	public ResponseEntity<OrderStatusDto> getUserOrderStatus(@PathVariable Long orderId) {
+		return new ResponseEntity<OrderStatusDto>(userService.getUserOrderStatus(orderId), HttpStatus.OK);
 	}
 
 	@PutMapping("{userId}/order/{orderId}")

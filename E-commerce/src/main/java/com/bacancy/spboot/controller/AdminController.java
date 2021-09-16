@@ -2,6 +2,8 @@ package com.bacancy.spboot.controller;
 
 import java.sql.Date;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
+	
+	Logger logger=LoggerFactory.getLogger(AdminController.class);
 
 	@PostMapping("/category")
 	public ResponseEntity<Object> createCategory(@RequestBody CategoriesDto categoriesDto) {
@@ -61,7 +65,7 @@ public class AdminController {
 	@PutMapping("/order/{id}")
 	public ResponseEntity<Object> updateOrder(@PathVariable Long id, @RequestBody OrderDto orderDto) {
 		adminService.updateOrder(id, orderDto);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@PutMapping("{userId}/order/{orderId}")
@@ -77,17 +81,17 @@ public class AdminController {
 	}
 
 	@GetMapping("/order/{start}/{end}")
-	public List<OrderDto> getAllOrderRangeOfDates(@PathVariable Date start, @PathVariable Date end) {
-		return adminService.getAllOrderRangeOfDate(start, end);
+	public ResponseEntity<List<OrderDto>> getAllOrderRangeOfDates(@PathVariable Date start, @PathVariable Date end) {
+		return new ResponseEntity<List<OrderDto>>(adminService.getAllOrderRangeOfDate(start, end), HttpStatus.OK);
 	}
 
 	@GetMapping("/order/track/{id}")
-	public OrderStatusDto trackOfTheOrder(@PathVariable Long id) {
-		return adminService.trackOfTheOrder(id);
+	public ResponseEntity<OrderStatusDto> trackOfTheOrder(@PathVariable Long id) {
+		return new ResponseEntity<OrderStatusDto>(adminService.trackOfTheOrder(id), HttpStatus.OK);
 	}
 	
 	@GetMapping("/product/sold/{start}/{end}")
-	public long totalProductsSold(@PathVariable Date start, @PathVariable Date end) {
-		return adminService.totalProductsSoldAmount(start, end);
+	public ResponseEntity<Long> totalProductsSold(@PathVariable Date start, @PathVariable Date end) {
+		return new ResponseEntity<Long>(adminService.totalProductsSoldAmount(start, end), HttpStatus.OK);
 	}
 }
