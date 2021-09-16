@@ -65,7 +65,7 @@ public class AdminService {
 		return productsDto;
 	}
 
-	public ProductsDto updateProduct(long id, ProductsDto productsDto) {
+	public ProductsDto updateProduct(Long id, ProductsDto productsDto) {
 		Optional<Products> product = productsRepository.findById(productsDto.getId());
 		if (!product.isPresent())
 			throw new DataNotFoundException("Product Not Found!");
@@ -74,7 +74,7 @@ public class AdminService {
 		return productsDto;
 	}
 
-	public void removeProduct(long id) {
+	public void removeProduct(Long id) {
 		productsRepository.deleteById(id);
 	}
 
@@ -85,7 +85,7 @@ public class AdminService {
 		return orderDto;
 	}
 
-	public OrderDto viewOrder(long id) {
+	public OrderDto viewOrder(Long id) {
 		Optional<Order> order = orderRepository.findById(id);
 		if (!order.isPresent()) {
 			throw new DataNotFoundException("Order does not exist");
@@ -94,7 +94,7 @@ public class AdminService {
 		return orderDto;
 	}
 
-	public OrderDto updateOrder(long id, OrderDto orderDto) {
+	public OrderDto updateOrder(Long id, OrderDto orderDto) {
 		Optional<Order> order = orderRepository.findById(orderDto.getId());
 		if (!order.isPresent())
 			throw new DataNotFoundException("Order Not Found!");
@@ -131,7 +131,7 @@ public class AdminService {
 		return orderDto;
 	}
 
-	public OrderStatusDto trackOfTheOrder(long id) {
+	public OrderStatusDto trackOfTheOrder(Long id) {
 		Optional<OrderStatus> orderStatus = orderStatusRepository.findById(id);
 		if (!orderStatus.isPresent()) {
 			throw new DataNotFoundException("Order does not exist");

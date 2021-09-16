@@ -37,13 +37,13 @@ public class AdminController {
 	}
 
 	@PutMapping("/category/product/{id}")
-	public ResponseEntity<Object> updateProduct(@PathVariable long id, @RequestBody ProductsDto productsDto) {
+	public ResponseEntity<Object> updateProduct(@PathVariable Long id, @RequestBody ProductsDto productsDto) {
 		adminService.updateProduct(id, productsDto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/category/product/{id}")
-	public ResponseEntity<Object> removeProduct(@PathVariable long id) {
+	public ResponseEntity<Object> removeProduct(@PathVariable Long id) {
 		adminService.removeProduct(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -54,24 +54,24 @@ public class AdminController {
 	}
 
 	@GetMapping("/order/{id}")
-	public ResponseEntity<OrderDto> viewOrder(@PathVariable long id) {
+	public ResponseEntity<OrderDto> viewOrder(@PathVariable Long id) {
 		return new ResponseEntity<OrderDto>(adminService.viewOrder(id), HttpStatus.OK);
 	}
 
 	@PutMapping("/order/{id}")
-	public ResponseEntity<Object> updateOrder(@PathVariable long id, @RequestBody OrderDto orderDto) {
+	public ResponseEntity<Object> updateOrder(@PathVariable Long id, @RequestBody OrderDto orderDto) {
 		adminService.updateOrder(id, orderDto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PutMapping("{userId}/order/{orderId}")
-	public ResponseEntity<Object> confirmOrder(@PathVariable long userId, @PathVariable Long orderId,
+	public ResponseEntity<Object> confirmOrder(@PathVariable Long userId, @PathVariable Long orderId,
 			@RequestBody OrderStatusDto orderStatusDto) {
 		return new ResponseEntity<>(adminService.confirmOrder(userId, orderId, orderStatusDto), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/order/{orderId}")
-	public ResponseEntity<Object> cancleOrder(@PathVariable long orderId, @RequestBody OrderDto orderDto) {
+	public ResponseEntity<Object> cancleOrder(@PathVariable Long orderId, @RequestBody OrderDto orderDto) {
 		adminService.cancleOrder(orderId, orderDto);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -82,7 +82,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/order/track/{id}")
-	public OrderStatusDto trackOfTheOrder(@PathVariable long id) {
+	public OrderStatusDto trackOfTheOrder(@PathVariable Long id) {
 		return adminService.trackOfTheOrder(id);
 	}
 	
