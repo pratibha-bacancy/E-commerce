@@ -24,7 +24,7 @@ public class OrderStatus {
 	private String status;
 
 	@Column(name = "order_date")
-	private Date OrderDate;
+	private Date orderDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -38,10 +38,12 @@ public class OrderStatus {
 
 	}
 
-	public OrderStatus(Long id, String status, Date orderDate) {
+	public OrderStatus(Long id, String status, Date orderDate, User user, Order order) {
 		this.id = id;
 		this.status = status;
-		OrderDate = orderDate;
+		this.orderDate = orderDate;
+		this.user = user;
+		this.order = order;
 	}
 
 	public Long getId() {
@@ -61,11 +63,11 @@ public class OrderStatus {
 	}
 
 	public Date getOrderDate() {
-		return OrderDate;
+		return orderDate;
 	}
 
 	public void setOrderDate(Date orderDate) {
-		OrderDate = orderDate;
+		orderDate = orderDate;
 	}
 
 	public void setUser(User user) {

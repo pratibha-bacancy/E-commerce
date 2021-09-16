@@ -87,8 +87,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/product/sold/{start}/{end}")
-	public List<ProductsDto> totalProductsSold(@PathVariable Date start, @PathVariable Date end) {
-		return adminService.totalProductsSold(start, end);
+	public long totalProductsSold(@PathVariable Date start, @PathVariable Date end) {
+		return adminService.totalProductsSoldAmount(start, end);
 	}
 
 }

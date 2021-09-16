@@ -140,12 +140,16 @@ public class AdminService {
 		return orderstatusDto;
 	}
 
-	public List<ProductsDto> totalProductsSold(Date start, Date end) {
-		Optional<OrderStatus> orderStatus = Optional.of(orderStatusRepository.findByOrderDateBetween(start, end));
-		if (orderStatus.get().getStatus().equals("Placed")) {
-
+	public long totalProductsSoldAmount(Date start, Date end) {
+		long amount = 0;
+		List<OrderStatus> orderStatus = (List<OrderStatus>) orderStatusRepository.findByOrderDateBetween(start, end);
+		int size = orderStatus.size();
+		for (int i = 0; i < size; i++) {
+			if (orderStatus.get(i).getStatus().equals("Placed")) {
+				amount = (long) (amount + (orderStatus.get(i).getOrder().getTotalPrice()));
+			}
 		}
-
+		return amount;
 	}
 
 }
