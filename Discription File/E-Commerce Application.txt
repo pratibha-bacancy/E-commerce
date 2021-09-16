@@ -1,1 +1,9 @@
 ﻿E-Commerce Application
+In this e-commerce application there are several entities like- User, Categories, Product, Order, OrderStatus, also the Dto Respective to them.
+For user entity Categories, Product, Order, OrderStatus all are mapped by @OneToMany annotation and for those entites Only one user is mapped @ManyToOne
+Category need products so categories mapped to the product now one category can get all product related to it.
+orderStatus is mapped to order to get Status.
+created controller and service for admin and user. exception, mode, dto, repository, service for those entities.
+Via Admin Controller admin can add product, update, remove, create oredr, view , confirm, canlce the order, track the order, amount od products sold, and can get order between the order date.
+User can perform the oprerations like get all products, orders, user Orders, user order status, modify that order and also cancle order, get order summary.
+ 
