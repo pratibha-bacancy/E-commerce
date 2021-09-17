@@ -35,20 +35,15 @@ public class Categories {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Products> products = new ArrayList<>();
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
-	private User user;
-
 	public Categories() {
 
 	}
 
-	public Categories(Long id, String categoryName, String categoryPictureUrl, List<Products> products, User user) {
+	public Categories(Long id, String categoryName, String categoryPictureUrl, List<Products> products) {
 		this.id = id;
 		this.categoryName = categoryName;
 		this.categoryPictureUrl = categoryPictureUrl;
 		this.products = products;
-		this.user = user;
 	}
 
 	public Long getId() {
@@ -81,14 +76,6 @@ public class Categories {
 
 	public void setProducts(List<Products> products) {
 		this.products = products;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public User getUser() {
-		return user;
 	}
 
 }

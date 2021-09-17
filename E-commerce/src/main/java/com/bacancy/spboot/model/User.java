@@ -39,9 +39,6 @@ public class User {
 	private List<Products> products = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Categories> categories = new ArrayList<>();
-
-	@OneToMany(cascade = CascadeType.ALL)
 	private List<Order> orders = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
@@ -52,14 +49,13 @@ public class User {
 	}
 
 	public User(Long id, String userName, String userDetail, String userEmail, String userContact,
-			List<Products> products, List<Categories> categories, List<Order> orders, List<OrderStatus> status) {
+			List<Products> products, List<Order> orders, List<OrderStatus> status) {
 		this.id = id;
 		this.userName = userName;
 		this.userDetail = userDetail;
 		this.userEmail = userEmail;
 		this.userContact = userContact;
 		this.products = products;
-		this.categories = categories;
 		this.orders = orders;
 		this.status = status;
 	}
@@ -106,10 +102,6 @@ public class User {
 
 	public List<Products> getProducts() {
 		return products;
-	}
-
-	public List<Categories> getCategories() {
-		return categories;
 	}
 
 	public List<Order> getOrder() {
