@@ -14,7 +14,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "categories")
-public class Categories {
+public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +31,11 @@ public class Categories {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Products> products = new ArrayList<>();
 
-	public Categories() {
+	public Category() {
 
 	}
 
-	public Categories(Long id, String categoryName, String categoryPictureUrl, List<Products> products) {
+	public Category(Long id, String categoryName, String categoryPictureUrl, List<Products> products) {
 		this.id = id;
 		this.categoryName = categoryName;
 		this.categoryPictureUrl = categoryPictureUrl;

@@ -1,15 +1,15 @@
 package com.bacancy.spboot.dto;
 
-public class CategoriesDto {
+public class CategoryDto {
 	private Long id;
 	private String categoryName;
 	private String categoryPictureUrl;
 
-	public CategoriesDto() {
+	public CategoryDto() {
 
 	}
 
-	public CategoriesDto(Long id, String categoryName, String categoryPictureUrl) {
+	public CategoryDto(Long id, String categoryName, String categoryPictureUrl) {
 		this.id = id;
 		this.categoryName = categoryName;
 		this.categoryPictureUrl = categoryPictureUrl;

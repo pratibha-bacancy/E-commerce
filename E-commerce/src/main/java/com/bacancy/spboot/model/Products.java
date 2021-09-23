@@ -37,7 +37,7 @@ public class Products {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
-	private Categories categories;
+	private Category category;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -48,13 +48,13 @@ public class Products {
 	}
 
 	public Products(Long id, String productName, String productPictureUrl, Double productPrice, User user,
-			Categories categories) {
+			Category category) {
 		this.id = id;
 		this.productName = productName;
 		this.productPictureUrl = productPictureUrl;
 		this.productPrice = productPrice;
 		this.user = user;
-		this.categories = categories;
+		this.category = category;
 	}
 
 	public Long getId() {
@@ -93,8 +93,8 @@ public class Products {
 		return user;
 	}
 
-	public Categories getCategories() {
-		return categories;
+	public Category getCategories() {
+		return category;
 	}
 
 }

@@ -3,11 +3,11 @@ package com.bacancy.spboot.repository;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.bacancy.spboot.model.Categories;
+import com.bacancy.spboot.model.Category;
 
 @Repository
-public interface CategoriesRepository extends JpaRepository<Categories, Long> {
+public interface CategoriesRepository extends JpaRepository<Category, Long> {
 
-	public Optional<Categories> findByCategoryName(String categoryName);
+	public Optional<Category> findByCategoryName(String categoryName);
 
 }

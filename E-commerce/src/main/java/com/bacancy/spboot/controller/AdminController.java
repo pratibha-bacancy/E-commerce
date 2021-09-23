@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.bacancy.spboot.dto.CategoriesDto;
+import com.bacancy.spboot.dto.CategoryDto;
 import com.bacancy.spboot.dto.OrderDto;
 import com.bacancy.spboot.dto.OrderStatusDto;
 import com.bacancy.spboot.dto.ProductsDto;
@@ -31,8 +31,8 @@ public class AdminController {
 	Logger logger=LoggerFactory.getLogger(AdminController.class);
 
 	@PostMapping("/category")
-	public ResponseEntity<Object> createCategory(@RequestBody CategoriesDto categoriesDto) {
-		return new ResponseEntity<>(adminService.createCategory(categoriesDto), HttpStatus.CREATED);
+	public ResponseEntity<Object> createCategory(@RequestBody CategoryDto categoryDto) {
+		return new ResponseEntity<>(adminService.createCategory(categoryDto), HttpStatus.CREATED);
 	}
 
 	@PostMapping("/category/product")

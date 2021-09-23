@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bacancy.spboot.dto.CategoriesDto;
+import com.bacancy.spboot.dto.CategoryDto;
 import com.bacancy.spboot.dto.OrderDto;
 import com.bacancy.spboot.dto.OrderStatusDto;
 import com.bacancy.spboot.dto.ProductsDto;
 import com.bacancy.spboot.exception.DataFoundException;
 import com.bacancy.spboot.exception.DataNotFoundException;
-import com.bacancy.spboot.model.Categories;
+import com.bacancy.spboot.model.Category;
 import com.bacancy.spboot.model.Order;
 import com.bacancy.spboot.model.OrderStatus;
 import com.bacancy.spboot.model.Products;
@@ -45,14 +45,14 @@ public class AdminService {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public CategoriesDto createCategory(CategoriesDto categoriesDto) {
-		Optional<Categories> category = categoriesRepository.findByCategoryName(categoriesDto.getCategoryName());
+	public CategoryDto createCategory(CategoryDto categoryDto) {
+		Optional<Category> category = categoriesRepository.findByCategoryName(categoryDto.getCategoryName());
 		if (category.isPresent()) {
 			throw new DataFoundException("Category Already Exist!");
 		}
-		Categories model = modelMapper.map(categoriesDto, Categories.class);
+		Category model = modelMapper.map(categoryDto, Category.class);
 		categoriesRepository.save(model);
-		return categoriesDto;
+		return categoryDto;
 	}
 
 	public ProductsDto addProduct(ProductsDto productsDto) {
